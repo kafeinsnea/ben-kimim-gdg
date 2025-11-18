@@ -22,7 +22,7 @@ const people = [
     { name: "Cem Yılmaz", image: "images/cem yılmaz.jpg", isCorrect: true },
     { name: "Elon Musk", image: "images/elon musk.jpg", isCorrect: true },
     { name: "Elraen", image: "images/elraen.jpg", isCorrect: true },
-    { name: "Fatih Terim", image: "images/fatihterim.jpeg", isCorrect: true },
+    { name: "Fatih Terim", image: "images/fatihterim.png", isCorrect: true },
     { name: "Güven Demir", image: "images/güven demir.jpg", isCorrect: true },
     { name: "Harry Potter", image: "images/harry potter.jpg", isCorrect: true },
     { name: "Hulk", image: "images/hulk.jpg", isCorrect: true },
@@ -50,6 +50,16 @@ const people = [
     { name: "Yakışıklı Güvenlik", image: "images/yakışıklı güvenlik.jpg", isCorrect: true },
 ];
 
+// Rastgele sıralama fonksiyonu (Fisher-Yates shuffle)
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
 // Sayfa yüklendiğinde
 document.addEventListener('DOMContentLoaded', () => {
     // Başlangıç ekranı butonuna event listener ekle
@@ -64,6 +74,8 @@ function startGame() {
     document.getElementById('welcomeScreen').style.display = 'none';
     // Oyun containerını göster
     document.getElementById('gameContainer').style.display = 'block';
+    // Kişileri rastgele sırala
+    people.splice(0, people.length, ...shuffleArray(people));
     // Oyunu başlat
     initializeGame();
 }
