@@ -11,8 +11,6 @@ let currentY = 0;
 let cardElement = null;
 
 // Kişi verileri
-// isCorrect: true = Bu kişiyi tanıyorsanız "Doğru" seçeneğini işaretleyin
-// isCorrect: false = Bu kişiyi tanımıyorsanız "Pas" seçeneğini işaretleyin
 const people = [
     { name: "Acun Ilıcalı", image: "images/acun ılıcalı.jpg", isCorrect: true },
     { name: "Albert Einstein", image: "images/albert einstein.jpg", isCorrect: true },
@@ -62,45 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    // Başlangıç ekranını gizle, oyun ekranını göster
+    // Başlangıç ekranını gizle
     document.getElementById('welcomeScreen').style.display = 'none';
+    // Oyun containerını göster
     document.getElementById('gameContainer').style.display = 'block';
-    
     // Oyunu başlat
     initializeGame();
 }
 
 function initializeGame() {
-    // Eğer kişi listesi boşsa, örnek placeholder ekle
-    if (people.length === 0) {
-        showPlaceholder();
-        return;
-    }
-    
     // Kartları oluştur
     createCards();
     // İlk kartı göster
     showNextCard();
     // Event listener'ları ekle
     setupEventListeners();
-}
-
-function showPlaceholder() {
-    const cardStack = document.getElementById('cardStack');
-    cardStack.innerHTML = `
-        <div class="card" style="position: relative;">
-            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding: 20px; text-align: center;">
-                <h2 style="color: #667eea; margin-bottom: 20px;">📸 Fotoğrafları Ekleyin</h2>
-                <p style="color: #666; margin-bottom: 10px;">1. <code>images</code> klasörü oluşturun</p>
-                <p style="color: #666; margin-bottom: 10px;">2. Fotoğrafları ekleyin</p>
-                <p style="color: #666; margin-bottom: 20px;">3. <code>script.js</code> dosyasındaki <code>people</code> array'ini doldurun</p>
-                <p style="color: #999; font-size: 14px;">Örnek format:</p>
-                <code style="background: #f5f5f5; padding: 10px; border-radius: 5px; font-size: 12px;">
-                    { name: "İsim", image: "images/foto.jpg", isCorrect: true }
-                </code>
-            </div>
-        </div>
-    `;
+    // İlerleme çubuğunu güncelle
+    updateProgress();
 }
 
 function createCards() {
@@ -113,9 +89,7 @@ function createCards() {
         card.dataset.index = index;
         card.innerHTML = `
             <img src="${person.image}" alt="${person.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22%3E%3Crect fill=%22%23ddd%22 width=%22400%22 height=%22600%22/%3E%3Ctext fill=%22%23999%22 font-family=%22sans-serif%22 font-size=%2220%22 dy=%2210.5%22 font-weight=%22bold%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EResim Yüklenemedi%3C/text%3E%3C/svg%3E'">
-            <div class="card-name-overlay">
-                <h2 class="card-name">${person.name}</h2>
-            </div>
+            <div class="card-name">${person.name}</div>
         `;
         cardStack.appendChild(card);
     });
@@ -138,18 +112,14 @@ function showNextCard() {
         } else {
             card.style.zIndex = people.length - index;
             card.style.display = 'block';
-            // Üstteki kartları daha az görünür yap - sadece 2-3 kart görünsün
-            const offset = index - currentIndex;
-            if (offset <= 2) {
-                card.style.transform = `scale(${1 - offset * 0.03}) translateY(${-offset * 8}px)`;
-                card.style.opacity = 1 - offset * 0.2;
-            } else {
-                card.style.display = 'none';
-            }
+            // Üstteki kartları sadece hafif geriye al, taşma olmasın
+            const offset = Math.min((index - currentIndex) * 3, 15);
+            card.style.transform = `translateY(${offset}px) scale(${1 - offset * 0.01})`;
         }
     });
     
     cardElement = document.querySelector(`.card[data-index="${currentIndex}"]`);
+    updateProgress();
 }
 
 function setupEventListeners() {
@@ -179,6 +149,10 @@ function setupEventListeners() {
 
 function handleStart(e) {
     if (!cardElement) return;
+    
+    // Sadece kart üzerinde başlarsa işlem yap
+    const target = e.target.closest('.card');
+    if (!target || target.dataset.index != currentIndex) return;
     
     const touch = e.touches ? e.touches[0] : e;
     startX = touch.clientX;
@@ -291,11 +265,17 @@ function updateScore() {
     document.getElementById('pass').textContent = passCount;
 }
 
+function updateProgress() {
+    const progress = (currentIndex / people.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressText').textContent = `${currentIndex} / ${people.length}`;
+}
+
 function endGame() {
     document.getElementById('cardStack').style.display = 'none';
     document.getElementById('noMoreCards').style.display = 'block';
     document.getElementById('finalCorrect').textContent = correctCount;
     document.getElementById('finalPass').textContent = passCount;
     document.querySelector('.actions').style.display = 'none';
+    document.querySelector('.progress-container').style.display = 'none';
 }
-

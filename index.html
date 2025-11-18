@@ -10,30 +10,32 @@
     <!-- Başlangıç Ekranı -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-content">
-            <h1 class="welcome-title">🎮 Ben Kimim?</h1>
-            <p class="welcome-subtitle">Ünlü kişileri tanıma oyunu</p>
+            <div class="welcome-header">
+                <h1 class="welcome-title">🎮 Ben Kimim?</h1>
+                <p class="welcome-subtitle">Ünlü kişileri tanıma oyunu</p>
+            </div>
             
             <div class="instructions-box">
                 <h2>📖 Nasıl Oynanır?</h2>
                 <div class="instruction-item">
-                    <div class="instruction-icon">👉</div>
+                    <div class="instruction-icon correct-icon">👉</div>
                     <div class="instruction-text">
-                        <strong>Sağa Kaydır</strong>
+                        <strong>Sağa Kaydır veya ✅</strong>
                         <p>Kişiyi tanıyorsan "Doğru"</p>
                     </div>
                 </div>
                 <div class="instruction-item">
-                    <div class="instruction-icon">👈</div>
+                    <div class="instruction-icon pass-icon">👈</div>
                     <div class="instruction-text">
-                        <strong>Sola Kaydır</strong>
+                        <strong>Sola Kaydır veya ❌</strong>
                         <p>Kişiyi tanımıyorsan "Pas"</p>
                     </div>
                 </div>
                 <div class="instruction-item">
-                    <div class="instruction-icon">🖱️</div>
+                    <div class="instruction-icon">🎯</div>
                     <div class="instruction-text">
-                        <strong>Alternatif</strong>
-                        <p>Butonları da kullanabilirsin</p>
+                        <strong>Skor Sistemi</strong>
+                        <p>En yüksek skoru hedefle!</p>
                     </div>
                 </div>
             </div>
@@ -48,10 +50,10 @@
     <!-- Oyun Alanı -->
     <div class="container" id="gameContainer" style="display: none;">
         <header>
-            <h1>Ben Kimim?</h1>
+            <h1>🎮 Ben Kimim?</h1>
             <div class="score">
-                <span class="correct-count">Doğru: <strong id="correct">0</strong></span>
-                <span class="pass-count">Pas: <strong id="pass">0</strong></span>
+                <span class="correct-count">✅ <strong id="correct">0</strong></span>
+                <span class="pass-count">❌ <strong id="pass">0</strong></span>
             </div>
         </header>
 
@@ -61,30 +63,46 @@
             </div>
             
             <div class="no-more-cards" id="noMoreCards" style="display: none;">
-                <h2>🎉 Oyun Bitti!</h2>
-                <p>Toplam Doğru: <strong id="finalCorrect">0</strong></p>
-                <p>Toplam Pas: <strong id="finalPass">0</strong></p>
-                <button onclick="location.reload()" class="restart-btn">Yeniden Başla</button>
+                <div class="game-over-content">
+                    <h2>🎉 Oyun Bitti!</h2>
+                    <div class="final-score">
+                        <div class="score-item">
+                            <span class="score-icon">✅</span>
+                            <span class="score-label">Doğru</span>
+                            <span class="score-value correct" id="finalCorrect">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-icon">❌</span>
+                            <span class="score-label">Pas</span>
+                            <span class="score-value pass" id="finalPass">0</span>
+                        </div>
+                    </div>
+                    <button onclick="location.reload()" class="restart-btn">
+                        🔄 Yeniden Başla
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="actions">
             <button class="action-btn pass-btn" id="passBtn">
-                <span>❌</span>
-                <span>PAS</span>
+                <span class="btn-icon">❌</span>
+                <span class="btn-text">PAS</span>
             </button>
             <button class="action-btn correct-btn" id="correctBtn">
-                <span>✅</span>
-                <span>DOĞRU</span>
+                <span class="btn-icon">✅</span>
+                <span class="btn-text">DOĞRU</span>
             </button>
         </div>
 
-        <div class="instructions">
-            <p>💡 Kartı sağa kaydır = Doğru | Sola kaydır = Pas</p>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0 / 36</span>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-

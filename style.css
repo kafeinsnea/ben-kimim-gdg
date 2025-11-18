@@ -13,19 +13,24 @@ body {
     align-items: center;
     padding: 20px;
     color: #333;
+    overflow-x: hidden;
 }
 
 /* Başlangıç Ekranı */
 .welcome-screen {
     width: 100%;
     max-width: 500px;
-    animation: fadeIn 0.5s ease-in;
+    background: white;
+    border-radius: 25px;
+    padding: 40px 30px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
 }
 
-@keyframes fadeIn {
+@keyframes slideIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -33,16 +38,13 @@ body {
     }
 }
 
-.welcome-content {
-    background: white;
-    border-radius: 25px;
-    padding: 40px 30px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+.welcome-header {
     text-align: center;
+    margin-bottom: 35px;
 }
 
 .welcome-title {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 800;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
@@ -54,20 +56,19 @@ body {
 .welcome-subtitle {
     font-size: 18px;
     color: #666;
-    margin-bottom: 40px;
+    font-weight: 500;
 }
 
 .instructions-box {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     border-radius: 20px;
-    padding: 30px 25px;
-    margin-bottom: 35px;
-    text-align: left;
+    padding: 30px;
+    margin-bottom: 30px;
 }
 
 .instructions-box h2 {
     font-size: 24px;
-    color: #667eea;
+    color: #333;
     margin-bottom: 25px;
     text-align: center;
 }
@@ -77,10 +78,15 @@ body {
     align-items: center;
     gap: 20px;
     margin-bottom: 20px;
-    padding: 15px;
     background: white;
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.instruction-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .instruction-item:last-child {
@@ -89,7 +95,30 @@ body {
 
 .instruction-icon {
     font-size: 40px;
-    flex-shrink: 0;
+    min-width: 50px;
+    text-align: center;
+}
+
+.correct-icon {
+    animation: slideRight 1.5s ease-in-out infinite;
+}
+
+.pass-icon {
+    animation: slideLeft 1.5s ease-in-out infinite;
+}
+
+@keyframes slideRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+@keyframes slideLeft {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+}
+
+.instruction-text {
+    flex: 1;
 }
 
 .instruction-text strong {
@@ -118,7 +147,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -133,19 +162,21 @@ body {
 
 .start-arrow {
     font-size: 24px;
-    transition: transform 0.3s;
+    animation: arrowBounce 1s ease-in-out infinite;
 }
 
-.start-btn:hover .start-arrow {
-    transform: translateX(5px);
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
 }
 
+/* Oyun Alanı */
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 450px;
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     position: relative;
 }
@@ -166,26 +197,27 @@ header h1 {
 .score {
     display: flex;
     justify-content: space-around;
-    gap: 20px;
-    font-size: 14px;
+    gap: 15px;
+    font-size: 15px;
 }
 
 .score span {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 8px 15px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 10px 20px;
+    border-radius: 25px;
     backdrop-filter: blur(10px);
+    font-weight: 600;
 }
 
 .score strong {
-    font-size: 18px;
+    font-size: 20px;
     margin-left: 5px;
 }
 
 .game-area {
     position: relative;
-    height: 500px;
-    background: #f5f5f5;
+    height: 550px;
+    background: #f8f9fa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -199,25 +231,26 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
 .card {
     position: absolute;
-    width: 90%;
-    max-width: 350px;
-    height: 450px;
+    width: 95%;
+    max-width: 380px;
+    height: 500px;
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     cursor: grab;
     user-select: none;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
     touch-action: none;
 }
 
-.card:not(:first-child) {
-    pointer-events: none;
+.card:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
 }
 
 .card:active {
@@ -231,23 +264,18 @@ header h1 {
     display: block;
 }
 
-/* Kart İsim Overlay */
-.card-name-overlay {
+.card-name {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
-    padding: 30px 20px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
     color: white;
-}
-
-.card-name {
-    font-size: 28px;
+    padding: 30px 20px 20px;
+    font-size: 24px;
     font-weight: 700;
     text-align: center;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    margin: 0;
 }
 
 .card.dragging {
@@ -265,49 +293,89 @@ header h1 {
     opacity: 0;
 }
 
+/* Oyun Sonu Ekranı */
 .no-more-cards {
     text-align: center;
-    padding: 40px 20px;
+    padding: 40px 30px;
+    width: 100%;
 }
 
-.no-more-cards h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
+.game-over-content h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
     color: #667eea;
 }
 
-.no-more-cards p {
-    font-size: 18px;
-    margin: 10px 0;
+.final-score {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    padding: 25px 35px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-icon {
+    font-size: 32px;
+}
+
+.score-label {
+    font-size: 14px;
     color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-value {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.score-value.correct {
+    color: #4facfe;
+}
+
+.score-value.pass {
+    color: #f5576c;
 }
 
 .restart-btn {
     margin-top: 30px;
-    padding: 15px 40px;
+    padding: 18px 45px;
     font-size: 18px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .restart-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
 .restart-btn:active {
     transform: translateY(0);
 }
 
+/* Aksiyonlar */
 .actions {
     display: flex;
     justify-content: space-around;
-    padding: 30px 20px;
+    padding: 25px 20px;
     gap: 20px;
     background: white;
 }
@@ -316,9 +384,9 @@ header h1 {
     flex: 1;
     padding: 20px;
     border: none;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: 600;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -328,8 +396,13 @@ header h1 {
     color: white;
 }
 
-.action-btn span:first-child {
-    font-size: 32px;
+.btn-icon {
+    font-size: 36px;
+}
+
+.btn-text {
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
 .action-btn:active {
@@ -338,33 +411,54 @@ header h1 {
 
 .pass-btn {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
 }
 
 .pass-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+    box-shadow: 0 12px 25px rgba(245, 87, 108, 0.4);
 }
 
 .correct-btn {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
 }
 
 .correct-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+    box-shadow: 0 12px 25px rgba(79, 172, 254, 0.4);
 }
 
-.instructions {
-    background: #f8f9fa;
+/* Progress Bar */
+.progress-container {
+    background: white;
     padding: 15px 20px;
-    text-align: center;
-    font-size: 13px;
-    color: #666;
     border-top: 1px solid #e9ecef;
 }
 
-.instructions strong {
-    color: #667eea;
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.progress-text {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
 }
 
 /* Swipe feedback */
@@ -373,16 +467,17 @@ header h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 60px;
+    font-size: 80px;
     font-weight: bold;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s;
     z-index: 999;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .swipe-indicator.show {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .swipe-indicator.correct {
@@ -395,6 +490,11 @@ header h1 {
 
 /* Responsive */
 @media (max-width: 480px) {
+    .welcome-screen {
+        border-radius: 0;
+        padding: 30px 20px;
+    }
+
     .container {
         border-radius: 0;
         height: 100vh;
@@ -402,11 +502,28 @@ header h1 {
     }
     
     .game-area {
-        height: 60vh;
+        height: calc(100vh - 300px);
     }
     
     .card {
-        height: 400px;
+        height: 90%;
+        max-height: 500px;
+    }
+
+    .welcome-title {
+        font-size: 36px;
+    }
+
+    .instructions-box {
+        padding: 20px;
+    }
+
+    .instruction-item {
+        padding: 15px;
+    }
+
+    .instruction-icon {
+        font-size: 32px;
+        min-width: 40px;
     }
 }
-
