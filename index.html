@@ -7,7 +7,46 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Başlangıç Ekranı -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">🎮 Ben Kimim?</h1>
+            <p class="welcome-subtitle">Ünlü kişileri tanıma oyunu</p>
+            
+            <div class="instructions-box">
+                <h2>📖 Nasıl Oynanır?</h2>
+                <div class="instruction-item">
+                    <div class="instruction-icon">👉</div>
+                    <div class="instruction-text">
+                        <strong>Sağa Kaydır</strong>
+                        <p>Kişiyi tanıyorsan "Doğru"</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">👈</div>
+                    <div class="instruction-text">
+                        <strong>Sola Kaydır</strong>
+                        <p>Kişiyi tanımıyorsan "Pas"</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">🖱️</div>
+                    <div class="instruction-text">
+                        <strong>Alternatif</strong>
+                        <p>Butonları da kullanabilirsin</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="start-btn" id="startBtn">
+                <span>Oyuna Başla</span>
+                <span class="start-arrow">→</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Oyun Alanı -->
+    <div class="container" id="gameContainer" style="display: none;">
         <header>
             <h1>Ben Kimim?</h1>
             <div class="score">
@@ -41,7 +80,7 @@
         </div>
 
         <div class="instructions">
-            <p>💡 <strong>Nasıl Oynanır:</strong> Kartı sağa kaydır = Doğru | Sola kaydır = Pas</p>
+            <p>💡 Kartı sağa kaydır = Doğru | Sola kaydır = Pas</p>
         </div>
     </div>
 

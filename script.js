@@ -54,8 +54,21 @@ const people = [
 
 // Sayfa yüklendiğinde
 document.addEventListener('DOMContentLoaded', () => {
-    initializeGame();
+    // Başlangıç ekranı butonuna event listener ekle
+    const startBtn = document.getElementById('startBtn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startGame);
+    }
 });
+
+function startGame() {
+    // Başlangıç ekranını gizle, oyun ekranını göster
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('gameContainer').style.display = 'block';
+    
+    // Oyunu başlat
+    initializeGame();
+}
 
 function initializeGame() {
     // Eğer kişi listesi boşsa, örnek placeholder ekle
@@ -98,7 +111,12 @@ function createCards() {
         const card = document.createElement('div');
         card.className = 'card';
         card.dataset.index = index;
-        card.innerHTML = `<img src="${person.image}" alt="${person.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22%3E%3Crect fill=%22%23ddd%22 width=%22400%22 height=%22600%22/%3E%3Ctext fill=%22%23999%22 font-family=%22sans-serif%22 font-size=%2220%22 dy=%2210.5%22 font-weight=%22bold%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EResim Yüklenemedi%3C/text%3E%3C/svg%3E'">`;
+        card.innerHTML = `
+            <img src="${person.image}" alt="${person.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22%3E%3Crect fill=%22%23ddd%22 width=%22400%22 height=%22600%22/%3E%3Ctext fill=%22%23999%22 font-family=%22sans-serif%22 font-size=%2220%22 dy=%2210.5%22 font-weight=%22bold%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22%3EResim Yüklenemedi%3C/text%3E%3C/svg%3E'">
+            <div class="card-name-overlay">
+                <h2 class="card-name">${person.name}</h2>
+            </div>
+        `;
         cardStack.appendChild(card);
     });
 }
@@ -114,14 +132,20 @@ function showNextCard() {
         if (index === currentIndex) {
             card.style.zIndex = people.length - index;
             card.style.display = 'block';
+            card.style.transform = '';
         } else if (index < currentIndex) {
             card.style.display = 'none';
         } else {
             card.style.zIndex = people.length - index;
             card.style.display = 'block';
-            // Üstteki kartları biraz geriye al
-            const offset = (index - currentIndex) * 5;
-            card.style.transform = `scale(${1 - offset * 0.02}) translateY(${offset}px)`;
+            // Üstteki kartları daha az görünür yap - sadece 2-3 kart görünsün
+            const offset = index - currentIndex;
+            if (offset <= 2) {
+                card.style.transform = `scale(${1 - offset * 0.03}) translateY(${-offset * 8}px)`;
+                card.style.opacity = 1 - offset * 0.2;
+            } else {
+                card.style.display = 'none';
+            }
         }
     });
     
