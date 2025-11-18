@@ -10,15 +10,46 @@ let currentX = 0;
 let currentY = 0;
 let cardElement = null;
 
-// Kişi verileri - Fotoğrafları ekledikten sonra buraya ekleyin
-// Format: { name: "İsim", image: "images/foto.jpg", isCorrect: true/false }
+// Kişi verileri
 // isCorrect: true = Bu kişiyi tanıyorsanız "Doğru" seçeneğini işaretleyin
 // isCorrect: false = Bu kişiyi tanımıyorsanız "Pas" seçeneğini işaretleyin
 const people = [
-    // Örnek format (yorum satırlarını kaldırıp kendi verilerinizi ekleyin):
-    // { name: "Albert Einstein", image: "images/einstein.jpg", isCorrect: true },
-    // { name: "Marie Curie", image: "images/curie.jpg", isCorrect: true },
-    // { name: "Nikola Tesla", image: "images/tesla.jpg", isCorrect: true },
+    { name: "Acun Ilıcalı", image: "images/acun ılıcalı.jpg", isCorrect: true },
+    { name: "Albert Einstein", image: "images/albert einstein.jpg", isCorrect: true },
+    { name: "Ali Koç", image: "images/ali koç.jpg", isCorrect: true },
+    { name: "Arda Güler", image: "images/arda güler.jpg", isCorrect: true },
+    { name: "Batman", image: "images/batman.jpg", isCorrect: true },
+    { name: "Buders", image: "images/buders.jpg", isCorrect: true },
+    { name: "Cakal", image: "images/cakal.jpg", isCorrect: true },
+    { name: "Cem Yılmaz", image: "images/cem yılmaz.jpg", isCorrect: true },
+    { name: "Elon Musk", image: "images/elon musk.jpg", isCorrect: true },
+    { name: "Elraen", image: "images/elraen.jpg", isCorrect: true },
+    { name: "Fatih Terim", image: "images/fatih terim.png", isCorrect: true },
+    { name: "Güven Demir", image: "images/güven demir.jpg", isCorrect: true },
+    { name: "Harry Potter", image: "images/harry potter.jpg", isCorrect: true },
+    { name: "Hulk", image: "images/hulk.jpg", isCorrect: true },
+    { name: "Iron Man", image: "images/ironman.jpg", isCorrect: true },
+    { name: "Jeff Bezos", image: "images/jeff bezos meme.jpg", isCorrect: true },
+    { name: "Kadıköy Boğası", image: "images/kadıköy boğası.jpg", isCorrect: true },
+    { name: "Kandıralı Ferdi", image: "images/kandıralı ferdi.jpg", isCorrect: true },
+    { name: "Kaptan Amerika", image: "images/kaptan amerika.jpg", isCorrect: true },
+    { name: "Lvbel C5", image: "images/lvbel c5.jpg", isCorrect: true },
+    { name: "Manifest", image: "images/manifest.jpg", isCorrect: true },
+    { name: "Marie Curie", image: "images/marie curie.jpg", isCorrect: true },
+    { name: "Mark Zuckerberg", image: "images/mark zuckerberg.jpg", isCorrect: true },
+    { name: "Merve Boluğur", image: "images/merve boluğur.jpg", isCorrect: true },
+    { name: "Nejat İşler", image: "images/nejat işler.jpg", isCorrect: true },
+    { name: "Orkun Işıtmak", image: "images/orkun ışıtmak.jpg", isCorrect: true },
+    { name: "Polat Alemdar", image: "images/polat alemdar.jpg", isCorrect: true },
+    { name: "Recep İvedik", image: "images/recep ivedik.jpg", isCorrect: true },
+    { name: "Serdar Ortaç", image: "images/serdar ortaç.jpg", isCorrect: true },
+    { name: "Superman", image: "images/superman.jpg", isCorrect: true },
+    { name: "Teoman", image: "images/teoman.jpg", isCorrect: true },
+    { name: "Nikola Tesla", image: "images/tesla.jpg", isCorrect: true },
+    { name: "Testo Taylan", image: "images/testo taylan.jpg", isCorrect: true },
+    { name: "Thor", image: "images/thor.jpg", isCorrect: true },
+    { name: "Tolga Çevik", image: "images/tolga çevik.jpg", isCorrect: true },
+    { name: "Yakışıklı Güvenlik", image: "images/yakışıklı güvenlik.jpg", isCorrect: true },
 ];
 
 // Sayfa yüklendiğinde
