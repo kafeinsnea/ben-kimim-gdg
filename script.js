@@ -22,7 +22,7 @@ const people = [
     { name: "Cem Yılmaz", image: "images/cem yılmaz.jpg", isCorrect: true },
     { name: "Elon Musk", image: "images/elon musk.jpg", isCorrect: true },
     { name: "Elraen", image: "images/elraen.jpg", isCorrect: true },
-    { name: "Fatih Terim", image: "images/fatih terim.png", isCorrect: true },
+    { name: "Fatih Terim", image: "images/fatihterim.jpeg", isCorrect: true },
     { name: "Güven Demir", image: "images/güven demir.jpg", isCorrect: true },
     { name: "Harry Potter", image: "images/harry potter.jpg", isCorrect: true },
     { name: "Hulk", image: "images/hulk.jpg", isCorrect: true },
