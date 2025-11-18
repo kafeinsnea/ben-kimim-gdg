@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ben Kimim? - Oyun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ben Kimim?</h1>
+            <div class="score">
+                <span class="correct-count">Doğru: <strong id="correct">0</strong></span>
+                <span class="pass-count">Pas: <strong id="pass">0</strong></span>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="card-stack" id="cardStack">
+                <!-- Kartlar JavaScript ile eklenecek -->
+            </div>
+            
+            <div class="no-more-cards" id="noMoreCards" style="display: none;">
+                <h2>🎉 Oyun Bitti!</h2>
+                <p>Toplam Doğru: <strong id="finalCorrect">0</strong></p>
+                <p>Toplam Pas: <strong id="finalPass">0</strong></p>
+                <button onclick="location.reload()" class="restart-btn">Yeniden Başla</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="action-btn pass-btn" id="passBtn">
+                <span>❌</span>
+                <span>PAS</span>
+            </button>
+            <button class="action-btn correct-btn" id="correctBtn">
+                <span>✅</span>
+                <span>DOĞRU</span>
+            </button>
+        </div>
+
+        <div class="instructions">
+            <p>💡 <strong>Nasıl Oynanır:</strong> Kartı sağa kaydır = Doğru | Sola kaydır = Pas</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
